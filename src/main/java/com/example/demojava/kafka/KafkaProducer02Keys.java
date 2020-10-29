@@ -10,19 +10,17 @@ import org.apache.kafka.common.serialization.StringSerializer;
  * @author HariomYadav
  * @since 28/10/20
  */
-public class KafkaProducer01 {
+public class KafkaProducer02Keys {
     public static void main(String[] args) {
-        // producer property
         Properties properties = new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
-        // producer object
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
-        // record object
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("first_topic", "hello from java");
-        //send data
+
+        //add key before value, same key makes msg to send to same partition
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("first_topic", "key01","hello from java");
         kafkaProducer.send(producerRecord);//this is async, run in background
         kafkaProducer.flush();//make async to flush all data
         kafkaProducer.close();//optional
