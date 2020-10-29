@@ -17,11 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaProducer01WithCallback {
     public static void main(String[] args) {
         // producer property
-        Properties properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-
+        Properties properties = getProperties();
         // producer object
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
         // record object
@@ -45,5 +41,13 @@ public class KafkaProducer01WithCallback {
 
         kafkaProducer.flush();//make async to flush all data
         kafkaProducer.close();//optional
+    }
+
+    private static Properties getProperties() {
+        Properties properties = new Properties();
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        return properties;
     }
 }
