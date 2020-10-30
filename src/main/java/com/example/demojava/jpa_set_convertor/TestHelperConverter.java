@@ -7,7 +7,7 @@ import java.util.List;
  * @author HariomYadav
  * @since 28/10/20
  */
-public class SetToStringToDB {
+public class TestHelperConverter {
     public static void main(String[] args) {
         final List<String> list = Arrays.asList("hari", "om", "yadav");
         HelperConverter helperConverter = new HelperConverter();
